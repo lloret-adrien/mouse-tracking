@@ -1,0 +1,277 @@
+.ball {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 40%, #fcfcfc, #efeff1 66%, #9b5050 100%);
+  overflow: hidden;
+  cursor: pointer;
+  transform: none;
+  animation: introEyes 5s cubic-bezier(0.65, 1.49, 0.76, 1.37);
+  user-select: none;
+}
+.ball:after {
+  content: "";
+  position: absolute;
+  top: 5%;
+  left: 10%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8) 14%, rgba(255, 255, 255, 0) 24%);
+  transform: translateX(-80px) translateY(-90px) skewX(-20deg);
+}
+
+.iris {
+  position: absolute;
+  overflow: hidden;
+  width: 40%;
+  height: 40%;
+  margin: 30%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%, #208ab4 0%, #6fbfff 30%, #4381b2 100%);
+}
+.iris:before {
+  content: "";
+  position: absolute;
+  width: 37.5%;
+  height: 37.5%;
+  border-radius: 50%;
+  top: 31.25%;
+  left: 31.25%;
+  background: black;
+  transition: all 500ms;
+}
+.iris:after {
+  content: "";
+  position: absolute;
+  width: 31.25%;
+  height: 31.25%;
+  border-radius: 50%;
+  top: 18.75%;
+  left: 18.75%;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gradient-white);
+  transition: all 500ms;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --gradient-black: linear-gradient(to bottom, rgb(0 0 0) 0%, rgb(0 0 0) 40%, #000000eb 100%);
+  --gradient-white: linear-gradient(to bottom, rgba(100, 100, 100, 0.2) 0%, rgba(255, 255, 255, 0.5) 40%, #ffffff 100%);
+}
+
+.ball > img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transform: translate(-52px, 4px) rotate(305deg);
+  opacity: 0;
+  transition: opacity 500ms ease;
+}
+
+.iris > img {
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.5s;
+}
+
+.-step1 .ball {
+  background: radial-gradient(circle at 50% 40%, #fcfcfc, #f2c1c1 66%, #ff0000 100%);
+}
+.-step1 .ball > img {
+  opacity: 0.6;
+}
+.-step1 .iris {
+  background: radial-gradient(circle at 50% 50%, #208ab4 0%, #6fbfff 30%, #e10000 100%);
+}
+.-step1 .iris::before {
+  transform: scale(1.2);
+}
+
+.-step2 .ball {
+  background: radial-gradient(circle at 50% 40%, #fcfcfc, #f09494 66%, #ff0000 100%);
+}
+.-step2 .ball > img {
+  opacity: 0.8;
+}
+.-step2 .iris {
+  background: radial-gradient(circle at 50% 50%, #208ab4 0%, #a0cff4 30%, #e10000 100%);
+}
+.-step2 .iris::before {
+  transform: scale(0.8);
+}
+
+.-step3 .ball {
+  background: radial-gradient(circle at 50% 40%, #ffffff, #e05858 66%, #000000 100%);
+}
+.-step3 .ball > img {
+  opacity: 1;
+}
+.-step3 .iris {
+  background: radial-gradient(circle at 50% 40%, #ffffff, #e05858 66%, #000000 100%);
+}
+.-step3 .iris::before {
+  transform: scale(0.7);
+}
+.-step3 .iris > img {
+  opacity: 0.2;
+}
+
+.-green .ball {
+  background: radial-gradient(circle at 50% 40%, #b6e3c3, #77de86 38%, #002401 100%);
+}
+.-green .ball > img {
+  opacity: 1;
+  filter: hue-rotate(75deg);
+}
+.-green .iris {
+  background: radial-gradient(circle at 50% 50%, #20b434 0%, #31a725 30%, #063714 100%);
+}
+.-green .iris > img {
+  opacity: 1;
+}
+.-green .iris::before {
+  transform: scale(0.6);
+}
+
+.-blackout .ball {
+  background: radial-gradient(circle at 50% 40%, #fcfcfc, #fcfcfc 66%, #fcfcfc 100%);
+  animation: bubble-anim 1s;
+}
+.-blackout .ball > img {
+  opacity: 0;
+}
+.-blackout .iris {
+  background: radial-gradient(circle at 50% 50%, #000000 0%, #000000 30%, #000000 100%);
+}
+.-blackout .eyelid {
+  display: block;
+}
+
+@keyframes bubble-anim {
+  0% {
+    transform: scale(1);
+  }
+  20% {
+    transform: scaleY(0.95) scaleX(1.05);
+  }
+  48% {
+    transform: scaleY(1.1) scaleX(0.9);
+  }
+  68% {
+    transform: scaleY(0.98) scaleX(1.02);
+  }
+  80% {
+    transform: scaleY(1.02) scaleX(0.98);
+  }
+  97%, 100% {
+    transform: scale(1);
+  }
+}
+
+.eyelid {
+  position: absolute;
+  width: 200%;
+  height: 100%;
+  background: black;
+  display: none;
+  z-index: 1;
+  top: -80%;
+  left: -50%;
+  -webkit-animation: blink 4.5s infinite linear alternate 1s, eyelid 8s infinite linear alternate 1s;
+  -webkit-transition: all .5s ease;
+}
+
+@keyframes blink{
+  0%{
+    top: -80%;
+  }
+ 95%{
+    top: -80%;
+  }
+  100%{ 
+    top: 0%;
+  }
+}
+
+@keyframes eyelid {
+  0%{
+    transform: none;
+  }
+  25%{
+    transform: rotate(10deg);
+  }
+  50% {
+    transform: rotate(-10deg);
+  }
+  75% {
+    transform: rotate(-8deg);
+  }
+  100% {
+    transform: rotate(-10deg);
+  }
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes introEyes {
+  0%{
+    transform: translate(-100vw) rotate(-380deg);
+  }
+  90% {
+    transform: translate(0) rotate(0deg);
+  }
+  95% {
+    transform: translateX(-50px) rotate(-35deg);
+  }
+  100% {
+    transform: translate(0) rotate(0deg);
+  }
+}
+
+@keyframes rollback {
+  0%{
+    transform: translate(0) rotate(0deg);
+  }
+  90% {
+    transform: translate(-100vw) rotate(-380deg);
+  }
+  95% {
+    transform: translate(-90vw) rotate(-370deg);
+  }
+  100% {
+    transform: translate(-100vw) rotate(-380deg);
+  }
+}
+
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* .container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 800px;
+  height: 500px;
+  background: red;
+} */
